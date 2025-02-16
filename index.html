@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .flashcard {
+            width: 300px;
+            padding: 60px;
+            margin: 40px auto;
+            border: 1px solid #803a74;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #4e6ac5;
+            display: none;
+        }
+
+        .flashcard-front, .flashcard-back {
+            display: none;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flashcard">
+        <div class="flashcard-front">
+            <h3>Ana is asleep.</h3>
+        </div>
+        <div class="flashcard-back">
+            <p>Ana está dormindo.</p>
+        </div>
+    </div>
+    <div class="flashcard">
+        <div class="flashcard-front">
+            <h3>Are these your keys?</h3>
+        </div>
+        <div class="flashcard-back">
+            <p>São estas as suas chaves?</p>
+        </div>
+    </div>
+    <div class="flashcard">
+        <div class="flashcard-front">
+            <h3>Are we in the same class?</h3>
+        </div>
+        <div class="flashcard-back">
+            <p>Nós estamos na mesma sala?</p>
+        </div>
+    </div>
+    <div class="flashcard">
+        <div class="flashcard-front">
+            <h3>Are you here for the concert?</h3>
+        </div>
+        <div class="flashcard-back">
+            <p>Você está aqui para o concerto?</p>
+        </div>
+    </div>
+    <div class="flashcard">
+        <div class="flashcard-front">
+            <h3>By the way</h3>
+        </div>
+        <div class="flashcard-back">
+            <p>A propósito</p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            let currentCard = 0;
+            const flashcards = $('.flashcard');
+
+            function showCard(index) {
+                flashcards.hide();
+                flashcards.eq(index).fadeIn();
+            }
+
+            flashcards.eq(currentCard).show();
+            $('.flashcard-front').slideDown();
+
+            $('.flashcard').click(function(){
+                $(this).children('.flashcard-front, .flashcard-back').slideToggle();
+            });
+
+            $('#prev').click(function(){
+                if (currentCard > 0) {
+                    flashcards.eq(currentCard).hide();
+                    currentCard--;
+                    showCard(currentCard);
+                }
+            });
+
+            $('#next').click(function(){
+                if (currentCard < flashcards.length - 1) {
+                    flashcards.eq(currentCard).hide();
+                    currentCard++;
+                    showCard(currentCard);
+                }
+            });
+
+            showCard(currentCard);
+        });
+    </script>
+
+</body>
+</html>
